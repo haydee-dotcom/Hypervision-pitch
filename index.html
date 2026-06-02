@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hypervision — Pitch Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --border: #e5e3dc;
+    --border-soft: #edecea;
+    --text: #1a1916;
+    --text-2: #6b6861;
+    --text-3: #a09d97;
+    --accent: #1a1916;
+    --green: #2d6a4f;
+    --green-bg: #eaf4ef;
+    --amber: #92400e;
+    --amber-bg: #fef3e2;
+    --red: #9b1c1c;
+    --red-bg: #fef2f2;
+    --blue: #1e40af;
+    --blue-bg: #eff6ff;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .page { max-width: 700px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  .header { margin-bottom: 2.5rem; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: .35rem; }
+  .logo { font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+  .header h1 { font-size: 26px; font-weight: 300; color: var(--text); letter-spacing: -.02em; }
+  .header h1 span { font-weight: 500; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
+  .card-label { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 1rem; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 150px; }
+  .field label { font-size: 13px; color: var(--text-2); font-weight: 400; }
+  .field input, .field textarea, .field select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 9px 12px;
+    outline: none; resize: none; width: 100%;
+    transition: border-color .15s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--text); }
+  .helper { font-size: 12px; color: var(--text-3); margin-top: 3px; }
+  .disco-row { display: flex; gap: 8px; }
+  .disco-row input { flex: 1; }
+  .tag-wrap {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 8px 12px;
+    min-height: 44px; cursor: text;
+  }
+  .tag-wrap input { border: none; background: none; outline: none; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; min-width: 140px; flex: 1; padding: 0; }
+  .tag {
+    font-size: 12px; padding: 3px 10px; border-radius: 20px;
+    background: var(--text); color: #fff;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .tag button { background: none; border: none; cursor: pointer; color: rgba(255,255,255,.7); font-size: 14px; padding: 0; line-height: 1; display: flex; align-items: center; }
+  .tag button:hover { color: #fff; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    border-radius: var(--radius-sm); padding: 10px 20px;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; border: none;
+    transition: opacity .15s, background .15s;
+  }
+  .btn-primary { background: var(--text); color: #fff; }
+  .btn-primary:hover { opacity: .85; }
+  .btn-primary:disabled { opacity: .35; cursor: not-allowed; }
+  .btn-secondary { background: none; color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--bg); }
+  .btn-sm { padding: 7px 14px; font-size: 13px; }
+  .btn-ghost { background: none; border: none; color: var(--text-2); cursor: pointer; font-size: 13px; font-family: 'DM Sans', sans-serif; padding: 0; display: inline-flex; align-items: center; gap: 5px; }
+  .btn-ghost:hover { color: var(--text); }
+  .gmail-bar {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1rem 1.25rem;
+    margin-bottom: 1rem; box-shadow: var(--shadow);
+  }
+  .gmail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+  .gmail-dot.connected { background: var(--green); }
+  .spinner { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--text); border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0; display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2); }
+  .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-weight: 500; }
+  .badge-green { background: var(--green-bg); color: var(--green); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber); }
+  .badge-red { background: var(--red-bg); color: var(--red); }
+  .badge-blue { background: var(--blue-bg); color: var(--blue); }
+  .badge-dark { background: var(--text); color: #fff; }
+  .alert { font-size: 13px; padding: .85rem 1rem; border-radius: var(--radius-sm); display: flex; gap: 10px; align-items: flex-start; margin-bottom: .75rem; line-height: 1.5; }
+  .alert-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
+  .alert-red { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+  .draft-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: .75rem; box-shadow: var(--shadow); transition: border-color .2s; }
+  .draft-card.approved { border-color: var(--green); }
+  .draft-card.skipped { opacity: .35; pointer-events: none; }
+  .edit-area {
+    width: 100%; font-size: 13px; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 12px;
+    font-family: 'DM Mono', monospace; resize: vertical;
+    outline: none; line-height: 1.7; margin-top: 8px;
+  }
+  .edit-area:focus { border-color: var(--text); }
+  .subject-input {
+    width: 100%; font-size: 13px; font-weight: 500; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 8px 12px;
+    font-family: 'DM Sans', sans-serif; outline: none; margin-bottom: 6px;
+  }
+  .subject-input:focus { border-color: var(--text); }
+  .contact-choice {
+    padding: .6rem .9rem; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); cursor: pointer;
+    font-size: 13px; margin-bottom: 5px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background .1s;
+  }
+  .contact-choice:hover { background: var(--bg); }
+  .contact-choice.selected { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+  .section-title { font-size: 16px; font-weight: 500; color: var(--text); margin: 2rem 0 .85rem; display: flex; justify-content: space-between; align-items: center; }
+  .log-entry { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--border-soft); font-size: 13px; gap: 12px; flex-wrap: wrap; }
+  .log-entry:last-child { border-bottom: none; }
+  .manual-email { width: 100%; font-size: 13px; padding: 7px 12px; border-radius: var(--radius-sm); border: 1px solid #fde68a; background: var(--amber-bg); color: var(--text); font-family: 'DM Sans', sans-serif; outline: none; margin-bottom: 8px; }
+  .notice { font-size: 12px; color: var(--green); display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+  .divider { height: 1px; background: var(--border-soft); margin: 1rem 0; }
+  .meta-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: .85rem; }
+  .actions-row { display: flex; gap: 8px; margin-top: 1rem; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-top">
+      <span class="logo">Hypervision</span>
+    </div>
+    <h1><span>Pitch</span> tool</h1>
+  </div>
+
+  <div class="gmail-bar" id="gmail-bar">
+    <div class="gmail-dot" id="gmail-dot"></div>
+    <span style="font-size:13px;color:var(--text-2);flex:1" id="gmail-status">Connect Gmail to save drafts and look up past emails</span>
+    <button class="btn btn-secondary btn-sm" onclick="connectGmail()" id="gmail-btn">Connect Gmail</button>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Configuration</div>
+    <div class="row">
+      <div class="field">
+        <label>Airtable token</label>
+        <input type="password" id="at-token" placeholder="pat3YX…" oninput="saveConfig()" />
+      </div>
+      <div class="field" style="max-width:160px;min-width:110px">
+        <label>Sender (fallback)</label>
+        <select id="sender-name" onchange="saveConfig()">
+          <option>Chris</option>
+          <option>Max</option>
+          <option>Ralph</option>
+        </select>
+      </div>
+    </div>
+    <p class="helper" style="margin-top:8px">Sender name auto-fills from Gmail when connected</p>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Step 1 — The track</div>
+    <div class="field" style="margin-bottom:14px">
+      <label>DISCO link</label>
+      <div class="disco-row">
+        <input type="text" id="disco-url" placeholder="https://s.disco.ac/…" />
+        <button class="btn btn-secondary btn-sm" onclick="fetchDisco()" id="fetch-btn">Auto-fill</button>
+      </div>
+      <div id="autofill-ok" class="notice" style="display:none">✓ Title and writers auto-filled from DISCO</div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>Track title</label>
+        <input type="text" id="track-title" placeholder="The Way I Do" />
+      </div>
+      <div class="field">
+        <label>Writers / artists</label>
+        <input type="text" id="track-writers" placeholder="Sara Hartman, Andy Tyler" />
+      </div>
+    </div>
+    <div class="field" style="margin-top:12px">
+      <label>Vibe — one punchy sentence</label>
+      <textarea id="track-vibe" rows="2" placeholder="Super catchy disco-influenced topline, warm and summery"></textarea>
+      <span class="helper">Goes straight into the email — one sentence, make it specific</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Step 2 — Recipients</div>
+    <div class="field" style="margin-bottom:14px">
+      <label>Artists to pitch to (finds their management automatically)</label>
+      <div class="tag-wrap" id="artist-wrap" onclick="document.getElementById('artist-input').focus()">
+        <input type="text" id="artist-input" placeholder="Artist name — press Enter…" onkeydown="handleTag(event,'artists','artist-wrap','artist-input')" />
+      </div>
+      <span class="helper">Searches Talents → then their Management contacts in Teams</span>
+    </div>
+    <div class="field">
+      <label>Companies / labels / publishers to pitch to directly</label>
+      <div class="tag-wrap" id="company-wrap" onclick="document.getElementById('company-input').focus()">
+        <input type="text" id="company-input" placeholder="Company name — press Enter…" onkeydown="handleTag(event,'companies','company-wrap','company-input')" />
+      </div>
+      <span class="helper">Searches Companies table directly</span>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:.25rem">
+    <button class="btn btn-primary" onclick="generateDrafts()" id="gen-btn">Generate drafts</button>
+    <div id="gen-status"></div>
+  </div>
+
+  <div id="attention-section" style="display:none">
+    <div class="section-title">Needs attention</div>
+    <div id="attention-container"></div>
+  </div>
+
+  <div id="drafts-section" style="display:none">
+    <div class="section-title">
+      Email drafts <span id="draft-count" style="font-size:13px;color:var(--text-2);font-weight:400"></span>
+    </div>
+    <div id="drafts-container"></div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:.5rem">
+      <button class="btn btn-primary" onclick="sendApproved()" id="send-btn">Save approved as Gmail drafts</button>
+      <div id="send-status"></div>
+    </div>
+  </div>
+
+  <div id="log-section" style="display:none">
+    <div class="section-title">
+      <span>Pitch log</span>
+      <button class="btn-ghost" onclick="toggleLog()" id="log-toggle">Show ▾</button>
+    </div>
+    <div id="log-container" style="display:none"></div>
+  </div>
+
+</div>
+
+<script>
+const BASE_ID = 'appgFxNIXKQlHHms8';
+const CLIENT_ID = '888678513782-mpcldrih4ikqslvii6p2j54atu63p5t1.apps.googleusercontent.com';
+const REDIRECT = location.href.split('?')[0].split('#')[0];
+const SCOPES = 'https://www.googleapis.com/auth/gmail.compose https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/userinfo.profile';
+
+let tags = { artists: [], companies: [] };
+let drafts = [];
+let pitchLog = JSON.parse(localStorage.getItem('hv_pitchlog') || '[]');
+let gmailToken = null;
+let gmailUser = null;
+let logVisible = false;
+
+function saveConfig() {
+  try {
+    localStorage.setItem('hv_at', document.getElementById('at-token').value);
+    localStorage.setItem('hv_sender', document.getElementById('sender-name').value);
+  } catch(e) {}
+}
+function loadConfig() {
+  try {
+    const t = localStorage.getItem('hv_at');
+    const s = localStorage.getItem('hv_sender');
+    if (t) document.getElementById('at-token').value = t;
+    if (s) document.getElementById('sender-name').value = s;
+  } catch(e) {}
+}
+loadConfig();
+
+// Handle OAuth redirect token in URL hash
+(function() {
+  const hash = location.hash;
+  if (hash && hash.includes('access_token')) {
+    const params = new URLSearchParams(hash.substring(1));
+    const token = params.get('access_token');
+    if (token) {
+      gmailToken = token;
+      history.replaceState(null, '', location.pathname);
+      fetchGmailUser();
+    }
+  }
+})();
+
+function connectGmail() {
+  const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT)}&response_type=token&scope=${encodeURIComponent(SCOPES)}&prompt=select_account`;
+  location.href = url;
+}
+
+async function fetchGmailUser() {
+  try {
+    const res = await fetch('https://www.googleapis.com/oauth2/v1/userinfo', { headers: { Authorization: `Bearer ${gmailToken}` } });
+    const u = await res.json();
+    gmailUser = u;
+    const firstName = u.given_name || u.name?.split(' ')[0] || 'You';
+    document.getElementById('gmail-status').textContent = `Connected as ${u.name} (${u.email})`;
+    document.getElementById('gmail-btn').textContent = '✓ Connected';
+    document.getElementById('gmail-btn').disabled = true;
+    document.getElementById('gmail-dot').classList.add('connected');
+    document.getElementById('sender-name').value = firstName;
+  } catch(e) {}
+}
+
+function handleTag(e, list, wrapId, inputId) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(/,$/, '');
+    if (val && !tags[list].includes(val)) { tags[list].push(val); renderTags(list, wrapId, inputId); }
+    e.target.value = '';
+  }
+}
+function renderTags(list, wrapId, inputId) {
+  const wrap = document.getElementById(wrapId);
+  const input = document.getElementById(inputId);
+  wrap.querySelectorAll('.tag').forEach(t => t.remove());
+  tags[list].forEach((t, i) => {
+    const tag = document.createElement('div');
+    tag.className = 'tag';
+    tag.innerHTML = `${t}<button onclick="removeTag('${list}','${wrapId}','${inputId}',${i})" aria-label="Remove ${t}">×</button>`;
+    wrap.insertBefore(tag, input);
+  });
+}
+function removeTag(list, wrapId, inputId, i) { tags[list].splice(i, 1); renderTags(list, wrapId, inputId); }
+
+async function fetchDisco() {
+  const url = document.getElementById('disco-url').value.trim();
+  if (!url) { alert('Paste a DISCO link first'); return; }
+  const btn = document.getElementById('fetch-btn');
+  btn.disabled = true; btn.textContent = 'Fetching…';
+  let found = false;
+  try {
+    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+    const data = await res.json();
+    const html = data.contents || '';
+    const ogTitle = html.match(/og:title[^>]*content="([^"]+)"/i) || html.match(/content="([^"]+)"[^>]*og:title/i);
+    const twitterTitle = html.match(/twitter:title[^>]*content="([^"]+)"/i) || html.match(/content="([^"]+)"[^>]*twitter:title/i);
+    const raw = (ogTitle || twitterTitle)?.[1] || '';
+    if (raw) {
+      const cleaned = raw.replace(/^Hypervision\s*[-–]\s*/i, '').trim();
+      const byIdx = cleaned.indexOf(' by ');
+      if (byIdx > -1) {
+        document.getElementById('track-title').value = cleaned.substring(0, byIdx).trim();
+        document.getElementById('track-writers').value = cleaned.substring(byIdx + 4).trim();
+        found = true;
+      } else if (cleaned) {
+        document.getElementById('track-title').value = cleaned;
+        found = true;
+      }
+    }
+  } catch(e) {}
+  document.getElementById('autofill-ok').style.display = found ? 'flex' : 'none';
+  if (!found) alert('Could not auto-fill — fill in manually.');
+  btn.disabled = false; btn.textContent = 'Auto-fill';
+}
+
+async function atFetch(path) {
+  const token = document.getElementById('at-token').value.trim();
+  if (!token) return null;
+  try {
+    const res = await fetch(`https://api.airtable.com/v0/${BASE_ID}${path}`, { headers: { Authorization: `Bearer ${token}` } });
+    return await res.json();
+  } catch(e) { return null; }
+}
+
+async function lookupArtist(name) {
+  const formula = encodeURIComponent(`SEARCH(LOWER("${name.toLowerCase()}"),LOWER({Name}))`);
+  const data = await atFetch(`/Talents?filterByFormula=${formula}&maxRecords=1`);
+  if (!data?.records?.length) return null;
+  const rec = data.records[0];
+  const talentId = rec.id;
+  const talentName = rec.fields['Name'] || name;
+  const teamsFormula = encodeURIComponent(`FIND("${talentId}",ARRAYJOIN({Management (Roster)}))`);
+  const teamsData = await atFetch(`/Teams?filterByFormula=${teamsFormula}&maxRecords=10`);
+  const contacts = (teamsData?.records || []).map(r => ({
+    id: r.id,
+    name: r.fields['Name'] || 'Unknown',
+    email: r.fields['Email'] || null,
+    tags: r.fields['Tags'] || '',
+    notes: r.fields['Notes'] || ''
+  }));
+  return { type: 'artist', talentId, talentName, contacts };
+}
+
+async function lookupCompany(name) {
+  const formula = encodeURIComponent(`SEARCH(LOWER("${name.toLowerCase()}"),LOWER({Name}))`);
+  const data = await atFetch(`/Companies?filterByFormula=${formula}&maxRecords=1`);
+  if (!data?.records?.length) return null;
+  const rec = data.records[0];
+  const f = rec.fields;
+  return { type: 'company', companyName: f['Name'] || name, email: f['Email'] || null, contactName: f['Contact name'] || null, notes: f['Notes'] || '' };
+}
+
+async function checkGmailHistory(name) {
+  if (!gmailToken) return null;
+  try {
+    const q = encodeURIComponent(`"${name}" in:sent`);
+    const res = await fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?q=${q}&maxResults=3`, { headers: { Authorization: `Bearer ${gmailToken}` } });
+    const data = await res.json();
+    if (!data.messages?.length) return null;
+    const msgRes = await fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${data.messages[0].id}?format=metadata&metadataHeaders=To`, { headers: { Authorization: `Bearer ${gmailToken}` } });
+    const msg = await msgRes.json();
+    const toHeader = msg.payload?.headers?.find(h => h.name === 'To');
+    if (!toHeader) return null;
+    const emailMatch = toHeader.value.match(/[\w.-]+@[\w.-]+\.\w+/);
+    return emailMatch ? { email: emailMatch[0], source: 'gmail' } : null;
+  } catch(e) { return null; }
+}
+
+function buildEmailBody(recipientInfo, selectedContact) {
+  const sender = document.getElementById('sender-name').value;
+  const title = document.getElementById('track-title').value.trim() || '[Title]';
+  const writers = document.getElementById('track-writers').value.trim() || '[Writers]';
+  const vibe = document.getElementById('track-vibe').value.trim();
+  const discoUrl = document.getElementById('disco-url').value.trim();
+  const targetArtist = recipientInfo.type === 'artist' ? recipientInfo.talentName : null;
+  const contactName = selectedContact?.name || recipientInfo.contactName || null;
+  const firstName = contactName ? contactName.split(' ')[0] : 'guys';
+  const descLine = vibe
+    ? (targetArtist ? `${vibe} — thought it could be a great fit for ${targetArtist}.` : `${vibe}.`)
+    : (targetArtist ? `Just heard something I think could really work for ${targetArtist}.` : '');
+  const body = `Hi ${firstName},\n\nHope all is well! ${descLine}\n\n${title}: ${discoUrl || '[demo link]'} (${writers})\n\nExcited to hear your thoughts!\n\nBest,\n${sender}`;
+  const subject = `${title} - ${recipientInfo.talentName || recipientInfo.companyName || ''}`;
+  return { subject, body };
+}
+
+async function generateDrafts() {
+  const allRecipients = [
+    ...tags.artists.map(n => ({ name: n, kind: 'artist' })),
+    ...tags.companies.map(n => ({ name: n, kind: 'company' }))
+  ];
+  if (!allRecipients.length) { alert('Add at least one recipient first'); return; }
+  if (!document.getElementById('track-title').value.trim()) { alert('Fill in the track title first'); return; }
+  document.getElementById('gen-btn').disabled = true;
+  document.getElementById('drafts-section').style.display = 'none';
+  document.getElementById('attention-section').style.display = 'none';
+  drafts = [];
+  const attention = [];
+  const statusEl = document.getElementById('gen-status');
+
+  for (const r of allRecipients) {
+    statusEl.innerHTML = `<div class="loading"><div class="spinner"></div><span>Looking up ${r.name}…</span></div>`;
+    let info = null;
+    if (r.kind === 'artist') info = await lookupArtist(r.name);
+    else info = await lookupCompany(r.name);
+
+    if (!info) {
+      let gmailResult = await checkGmailHistory(r.name);
+      if (gmailResult) {
+        info = { type: r.kind, talentName: r.name, companyName: r.name, contacts: [{ name: r.name, email: gmailResult.email }], email: gmailResult.email, source: 'gmail' };
+      } else {
+        attention.push({ name: r.name, issue: 'not_found', kind: r.kind });
+        drafts.push({ recipient: r.name, kind: r.kind, info: null, selectedContact: null, contacts: [], email: null, emailDraft: buildEmailBody({ type: r.kind, talentName: r.name, companyName: r.name }, null), approved: false, skipped: false, needsEmail: true });
+        continue;
+      }
+    }
+
+    const contacts = info.contacts || [];
+    const alreadyPitched = pitchLog.find(l => l.recipient === (info.talentName || info.companyName || r.name));
+    if (alreadyPitched) attention.push({ name: r.name, issue: 'already_pitched', date: alreadyPitched.date, kind: r.kind });
+
+    if (contacts.length > 1) {
+      attention.push({ name: r.name, issue: 'multiple_contacts', contacts, kind: r.kind });
+      drafts.push({ recipient: r.name, kind: r.kind, info, selectedContact: contacts[0], contacts, email: contacts[0]?.email || null, emailDraft: buildEmailBody(info, contacts[0]), approved: false, skipped: false, needsContactChoice: true });
+    } else {
+      const contact = contacts[0] || null;
+      const email = contact?.email || info.email || null;
+      drafts.push({ recipient: r.name, kind: r.kind, info, selectedContact: contact, contacts, email, emailDraft: buildEmailBody(info, contact), approved: false, skipped: false, needsEmail: !email });
+    }
+  }
+
+  renderAttention(attention);
+  renderDrafts();
+  document.getElementById('gen-btn').disabled = false;
+  statusEl.innerHTML = '';
+  if (drafts.length) {
+    document.getElementById('drafts-section').style.display = 'block';
+    document.getElementById('draft-count').textContent = `— ${drafts.length} draft${drafts.length !== 1 ? 's' : ''}`;
+  }
+  if (pitchLog.length) renderLog();
+}
+
+function renderAttention(items) {
+  const sec = document.getElementById('attention-section');
+  const con = document.getElementById('attention-container');
+  if (!items.length) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  con.innerHTML = '';
+  items.forEach(item => {
+    const div = document.createElement('div');
+    if (item.issue === 'not_found') {
+      div.className = 'alert alert-red';
+      div.innerHTML = `<span>⚠</span><span><strong>${item.name}</strong> not found in Airtable${gmailToken ? '' : ' — connect Gmail to also check email history'}. Enter email manually in the draft below.</span>`;
+    } else if (item.issue === 'already_pitched') {
+      div.className = 'alert alert-amber';
+      div.innerHTML = `<span>↺</span><span><strong>${item.name}</strong> was already pitched on ${item.date} — double-check before sending.</span>`;
+    } else if (item.issue === 'multiple_contacts') {
+      div.className = 'alert alert-amber';
+      div.innerHTML = `<span>↕</span><span><strong>${item.name}</strong> has ${item.contacts.length} contacts in Airtable — select which one to use in the draft below.</span>`;
+    }
+    con.appendChild(div);
+  });
+}
+
+function selectContact(draftIdx, contactIdx) {
+  const d = drafts[draftIdx];
+  d.selectedContact = d.contacts[contactIdx];
+  d.email = d.contacts[contactIdx]?.email || null;
+  d.emailDraft = buildEmailBody(d.info, d.selectedContact);
+  d.needsContactChoice = false;
+  renderDrafts();
+}
+
+function renderDrafts() {
+  const container = document.getElementById('drafts-container');
+  container.innerHTML = '';
+  drafts.forEach((d, i) => {
+    const card = document.createElement('div');
+    card.className = `draft-card${d.approved ? ' approved' : ''}${d.skipped ? ' skipped' : ''}`;
+    const recipientLabel = d.info?.talentName || d.info?.companyName || d.recipient;
+    const managerName = d.selectedContact?.name || d.info?.contactName || '';
+    const email = d.email || '';
+    const subject = d.emailDraft?.subject || '';
+    const body = d.emailDraft?.body || '';
+    let sourceBadge = '';
+    if (d.info?.source === 'gmail') sourceBadge = `<span class="badge badge-blue">Found via Gmail</span>`;
+    else if (d.email) sourceBadge = `<span class="badge badge-green">Found in Airtable</span>`;
+    else sourceBadge = `<span class="badge badge-red">No email found</span>`;
+    const approvedBadge = d.approved ? `<span class="badge badge-dark">✓ Approved</span>` : '';
+
+    let contactChoiceHtml = '';
+    if (d.needsContactChoice && d.contacts.length > 1) {
+      contactChoiceHtml = `<div style="margin-bottom:12px">
+        <div style="font-size:12px;color:var(--text-2);margin-bottom:6px">Multiple contacts found — choose one:</div>
+        ${d.contacts.map((c, ci) => `<div class="contact-choice${d.selectedContact?.id === c.id ? ' selected' : ''}" onclick="selectContact(${i},${ci})">
+          <span><strong>${c.name}</strong>${c.tags ? ` · ${c.tags}` : ''}</span>
+          <span style="font-size:12px;color:var(--text-3)">${c.email || 'no email'}</span>
+        </div>`).join('')}
+      </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="meta-row">
+        <div style="flex:1">
+          <div style="font-size:13px;color:var(--text-2)">Recipient: <strong style="color:var(--text)">${recipientLabel}</strong></div>
+          ${managerName ? `<div style="font-size:13px;color:var(--text-2);margin-top:2px">Contact: <strong style="color:var(--text)">${managerName}</strong>${email ? ` &lt;${email}&gt;` : ''}</div>` : ''}
+          <div style="font-size:12px;color:var(--text-3);margin-top:2px">CC: music@hypervision.club</div>
+        </div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">${approvedBadge}${sourceBadge}</div>
+      </div>
+      ${contactChoiceHtml}
+      ${!email ? `<input type="email" class="manual-email" placeholder="Email not found — enter manually…" id="manual-email-${i}" />` : ''}
+      <div style="font-size:12px;color:var(--text-3);margin-bottom:4px">Subject</div>
+      <input type="text" class="subject-input" id="subject-${i}" value="${subject.replace(/"/g, '&quot;')}" />
+      <textarea class="edit-area" id="body-${i}" rows="10">${body}</textarea>
+      <div class="actions-row">
+        ${d.approved
+          ? `<button class="btn btn-secondary btn-sm" onclick="unapprove(${i})">Unapprove</button>`
+          : d.skipped
+          ? `<button class="btn btn-secondary btn-sm" onclick="unskip(${i})">Restore</button>`
+          : `<button class="btn btn-primary btn-sm" onclick="approve(${i})">✓ Approve</button>
+             <button class="btn btn-secondary btn-sm" onclick="skip(${i})">Skip</button>`
+        }
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+function approve(i) {
+  const manual = document.getElementById(`manual-email-${i}`);
+  if (manual?.value?.trim()) { if (!drafts[i].info) drafts[i].info = {}; drafts[i].email = manual.value.trim(); }
+  drafts[i].emailDraft.subject = document.getElementById(`subject-${i}`).value;
+  drafts[i].emailDraft.body = document.getElementById(`body-${i}`).value;
+  drafts[i].approved = true; drafts[i].skipped = false;
+  renderDrafts();
+}
+function unapprove(i) { drafts[i].approved = false; renderDrafts(); }
+function skip(i) { drafts[i].skipped = true; renderDrafts(); }
+function unskip(i) { drafts[i].skipped = false; renderDrafts(); }
+
+function makeGmailDraft(to, subject, body) {
+  const sender = gmailUser?.email || 'me';
+  const raw = `From: ${sender}\r\nTo: ${to}\r\nCc: music@hypervision.club\r\nSubject: ${subject}\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n${body}`;
+  const encoded = btoa(unescape(encodeURIComponent(raw))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  return fetch('https://gmail.googleapis.com/gmail/v1/users/me/drafts', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${gmailToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: { raw: encoded } })
+  });
+}
+
+async function sendApproved() {
+  const approved = drafts.filter(d => d.approved);
+  if (!approved.length) { alert('Approve at least one draft first'); return; }
+  const statusEl = document.getElementById('send-status');
+  if (!gmailToken) {
+    statusEl.innerHTML = `<span style="font-size:13px;color:var(--amber)">Connect Gmail first</span>`;
+    return;
+  }
+  statusEl.innerHTML = `<div class="loading"><div class="spinner"></div><span>Saving drafts…</span></div>`;
+  let ok = 0; let fail = 0;
+  for (const d of approved) {
+    const email = d.email || d.selectedContact?.email || '';
+    if (!email) { fail++; continue; }
+    try {
+      const res = await makeGmailDraft(email, d.emailDraft.subject, d.emailDraft.body);
+      if (res.ok) {
+        ok++;
+        pitchLog.push({ recipient: d.info?.talentName || d.info?.companyName || d.recipient, email, date: new Date().toLocaleDateString('en-GB'), sender: document.getElementById('sender-name').value });
+      } else { fail++; }
+    } catch(e) { fail++; }
+  }
+  try { localStorage.setItem('hv_pitchlog', JSON.stringify(pitchLog)); } catch(e) {}
+  renderLog();
+  const msg = fail ? `${ok} saved, ${fail} failed (missing email?)` : `${ok} draft${ok !== 1 ? 's' : ''} saved to Gmail ✓`;
+  statusEl.innerHTML = `<span style="font-size:13px;color:${fail ? 'var(--amber)' : 'var(--green)'}">${msg}</span>`;
+}
+
+function renderLog() {
+  if (!pitchLog.length) return;
+  document.getElementById('log-section').style.display = 'block';
+  const con = document.getElementById('log-container');
+  if (!logVisible) { con.style.display = 'none'; return; }
+  con.style.display = 'block';
+  con.innerHTML = `<div class="card" style="margin-top:0">` + pitchLog.slice().reverse().map(l => `
+    <div class="log-entry">
+      <span style="font-weight:500">${l.recipient}</span>
+      <span style="color:var(--text-2);font-family:'DM Mono',monospace;font-size:12px">${l.email}</span>
+      <span style="color:var(--text-3);font-size:12px">${l.date} · ${l.sender}</span>
+    </div>`).join('') + `</div>`;
+}
+
+function toggleLog() {
+  logVisible = !logVisible;
+  document.getElementById('log-toggle').textContent = logVisible ? 'Hide ▴' : 'Show ▾';
+  renderLog();
+}
+</script>
+</body>
+</html>
