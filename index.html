@@ -12,10 +12,10 @@
   --bg:#f5f4f0;--surface:#fff;--surface2:#faf9f7;
   --border:#e8e6e0;--border2:#d8d5ce;
   --text:#1c1b18;--text2:#6e6b63;--text3:#a8a49c;
-  --accent:#1c1b18;--green:#1a6640;--green-bg:#edf7f2;--green-border:#b6dfc8;
+  --green:#1a6640;--green-bg:#edf7f2;--green-border:#b6dfc8;
   --amber:#7c4a00;--amber-bg:#fef6e4;--amber-border:#f5d48a;
   --red:#8b1a1a;--red-bg:#fef2f2;--red-border:#fbc9c9;
-  --blue:#1a3a8b;--blue-bg:#eff4ff;
+  --blue:#1a3a8b;--blue-bg:#eff4ff;--blue-border:#bfdbfe;
   --r:10px;--r-sm:6px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -42,6 +42,7 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 .btn-secondary{background:none;color:var(--text);border:1px solid var(--border2)}
 .btn-secondary:hover{background:var(--bg)}
 .btn-sm{padding:6px 14px;font-size:13px}
+.btn-xs{padding:4px 10px;font-size:12px}
 .btn-ghost{background:none;border:none;color:var(--text2);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;padding:4px 8px;border-radius:var(--r-sm);display:inline-flex;align-items:center;gap:5px}
 .btn-ghost:hover{background:var(--bg);color:var(--text)}
 .gmail-bar{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.85rem 1.25rem;margin-bottom:1.5rem}
@@ -49,156 +50,148 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 .gmail-dot.on{background:var(--green)}
 .meeting-block{margin-bottom:2rem}
 .meeting-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
-.meeting-date-badge{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;background:var(--text);color:#fff}
+.meeting-date-badge{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;background:var(--text);color:#fff;display:flex;align-items:center;gap:6px}
 .meeting-date-badge.past{background:var(--bg);color:var(--text2);border:1px solid var(--border)}
 .meeting-divider{flex:1;height:1px;background:var(--border)}
-.meeting-toggle{font-size:12px;color:var(--text3);cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0}
-.meeting-toggle:hover{color:var(--text2)}
 .song-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:.75rem;overflow:hidden;transition:box-shadow .15s}
 .song-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.song-card-header{display:flex;align-items:center;gap:12px;padding:1rem 1.25rem;cursor:pointer}
-.song-num{font-size:12px;font-weight:500;font-family:'DM Mono',monospace;color:var(--text3);width:20px;flex-shrink:0}
+.song-card-header{display:flex;align-items:center;gap:12px;padding:1rem 1.25rem;cursor:pointer;user-select:none}
+.song-num{font-size:12px;font-weight:500;font-family:'DM Mono',monospace;color:var(--text3);width:22px;flex-shrink:0}
 .song-title-wrap{flex:1;min-width:0}
 .song-title{font-size:15px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.song-writers{font-size:12px;color:var(--text3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.song-writers{font-size:12px;color:var(--text3);margin-top:1px}
 .song-badges{display:flex;gap:5px;flex-wrap:wrap;flex-shrink:0}
 .badge{font-size:11px;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;font-weight:500}
 .badge-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
 .badge-amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
 .badge-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
-.badge-blue{background:var(--blue-bg);color:var(--blue)}
-.badge-dark{background:var(--text);color:#fff}
+.badge-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
 .badge-neutral{background:var(--bg);color:var(--text2);border:1px solid var(--border)}
-.song-body{padding:0 1.25rem 1.25rem;border-top:1px solid var(--border);display:none}
+.song-body{padding:1.25rem;border-top:1px solid var(--border);display:none}
 .song-body.open{display:block}
-.field-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem}
-.field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:140px}
-.field label{font-size:12px;color:var(--text2);font-weight:400}
-.field input,.field textarea,.field select{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:8px 10px;outline:none;resize:none;width:100%;transition:border-color .15s}
-.field input:focus,.field textarea:focus{border-color:var(--text)}
-.helper{font-size:11px;color:var(--text3);margin-top:3px}
-.disco-row{display:flex;gap:7px}
-.disco-row input{flex:1}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;color:var(--text2)}
+.inp{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:8px 10px;outline:none;width:100%;transition:border-color .15s}
+.inp:focus{border-color:var(--text)}
 .tag-wrap{display:flex;flex-wrap:wrap;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:7px 10px;min-height:40px;cursor:text;transition:border-color .15s}
 .tag-wrap:focus-within{border-color:var(--text)}
-.tag-wrap input{border:none;background:none;outline:none;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;min-width:120px;flex:1;padding:0}
-.tag{font-size:12px;padding:2px 9px;border-radius:20px;background:var(--text);color:#fff;display:flex;align-items:center;gap:4px}
-.tag button{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.6);font-size:13px;padding:0;line-height:1;display:flex}
+.tag-wrap input{border:none;background:none;outline:none;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;min-width:130px;flex:1;padding:2px 0}
+.tag{font-size:12px;padding:3px 10px;border-radius:20px;background:var(--text);color:#fff;display:flex;align-items:center;gap:4px}
+.tag button{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.55);font-size:14px;padding:0;line-height:1}
 .tag button:hover{color:#fff}
-.pitches-section{margin-top:1rem}
-.pitch-row{display:flex;align-items:center;gap:10px;padding:.6rem .85rem;border:1px solid var(--border);border-radius:var(--r-sm);margin-bottom:.4rem;font-size:13px;flex-wrap:wrap;gap:8px}
-.pitch-row.approved{border-color:var(--green-border);background:var(--green-bg)}
-.pitch-row.skipped{opacity:.35}
-.pitch-artist{font-weight:500;flex:1;min-width:100px}
-.pitch-contact{color:var(--text2);font-size:12px;flex:1;min-width:100px}
-.pitch-actions{display:flex;gap:5px;flex-shrink:0}
-.draft-modal{position:fixed;inset:0;background:rgba(28,27,24,.45);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem}
-.draft-inner{background:var(--surface);border-radius:var(--r);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.draft-top{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.pitch-table{width:100%;border-collapse:collapse;margin-top:.5rem}
+.pitch-table th{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:.4rem .75rem;border-bottom:1px solid var(--border)}
+.pitch-table td{font-size:13px;padding:.6rem .75rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.pitch-table tr:last-child td{border-bottom:none}
+.pitch-table tr.approved td{background:var(--green-bg)}
+.pitch-table tr.skipped td{opacity:.35}
+.vibe-suggestions{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.vibe-pill{font-size:12px;padding:4px 10px;border-radius:20px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .12s}
+.vibe-pill:hover{background:var(--text);color:#fff;border-color:var(--text)}
+.draft-modal{position:fixed;inset:0;background:rgba(28,27,24,.5);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem}
+.draft-inner{background:var(--surface);border-radius:var(--r);width:100%;max-width:580px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.22)}
+.draft-top{display:flex;align-items:flex-start;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);gap:12px}
 .draft-content{padding:1.5rem}
-.edit-area{width:100%;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;font-family:'DM Mono',monospace;resize:vertical;outline:none;line-height:1.75;min-height:200px}
+.edit-area{width:100%;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;font-family:'DM Mono',monospace;resize:vertical;outline:none;line-height:1.8;min-height:210px}
 .edit-area:focus{border-color:var(--text)}
 .subject-inp{width:100%;font-size:13px;font-weight:500;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:7px 10px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:8px}
 .spinner{width:13px;height:13px;border:2px solid var(--border2);border-top-color:var(--text);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text2)}
-.alert{font-size:13px;padding:.75rem 1rem;border-radius:var(--r-sm);display:flex;gap:8px;margin-bottom:.75rem;line-height:1.5}
+.alert{font-size:13px;padding:.75rem 1rem;border-radius:var(--r-sm);display:flex;gap:8px;margin-bottom:.75rem;line-height:1.5;align-items:flex-start}
 .alert-amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
-.alert-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.alert-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.contact-choice{padding:.55rem .9rem;border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;font-size:13px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;transition:all .1s}
+.contact-choice:hover{background:var(--bg)}
+.contact-choice.selected{border-color:var(--green-border);background:var(--green-bg);color:var(--green)}
 .empty-state{text-align:center;padding:3rem 1rem;color:var(--text3)}
-.empty-state p{font-size:14px;margin-top:.5rem}
-.add-song-form{background:var(--surface);border:1px dashed var(--border2);border-radius:var(--r);padding:1.25rem;margin-bottom:.75rem}
+.add-song-card{background:var(--surface);border:1px dashed var(--border2);border-radius:var(--r);padding:1.25rem;margin-bottom:.75rem}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:.75rem}
 .coming-soon{padding:4rem 2rem;text-align:center;color:var(--text3)}
 .coming-soon h2{font-size:18px;font-weight:400;margin-bottom:.5rem;color:var(--text2)}
-.log-row{display:flex;gap:10px;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:13px;flex-wrap:wrap}
-.log-row:last-child{border-bottom:none}
+.date-edit-input{font-family:'DM Sans',sans-serif;font-size:12px;padding:3px 8px;border-radius:var(--r-sm);border:1px solid var(--border2);background:var(--surface);color:var(--text);outline:none;margin-left:4px}
 </style>
 </head>
 <body>
 <div class="layout">
-
 <aside class="sidebar">
   <div class="sidebar-logo">Hypervision</div>
   <div class="nav-section">
     <div class="nav-label">A&R Meeting</div>
-    <button class="nav-item" onclick="showTab('pipeline')">
-      <span class="dot"></span> Pipeline <span class="soon">soon</span>
-    </button>
-    <button class="nav-item" onclick="showTab('clients')">
-      <span class="dot"></span> Existing clients <span class="soon">soon</span>
-    </button>
-    <button class="nav-item active" id="nav-songs" onclick="showTab('songs')">
-      <span class="dot"></span> Songs
-    </button>
+    <button class="nav-item" onclick="showTab('pipeline')"><span class="dot"></span>Pipeline<span class="soon">soon</span></button>
+    <button class="nav-item" onclick="showTab('clients')"><span class="dot"></span>Existing clients<span class="soon">soon</span></button>
+    <button class="nav-item active" id="nav-songs" onclick="showTab('songs')"><span class="dot"></span>Songs</button>
   </div>
   <div style="flex:1"></div>
   <div style="padding:1rem 1.25rem;border-top:1px solid var(--border)">
-    <div style="font-size:12px;color:var(--text3);margin-bottom:.4rem">Sender</div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:.4rem">Default sender</div>
     <select id="sender-name" onchange="saveConfig()" style="font-family:'DM Sans',sans-serif;font-size:13px;width:100%;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 8px;color:var(--text);outline:none">
       <option>Chris</option><option>Max</option><option>Ralph</option>
     </select>
+    <div style="font-size:12px;color:var(--text3);margin:.85rem 0 .4rem">Airtable token</div>
+    <input type="password" id="at-token" placeholder="pat3YX…" oninput="saveConfig()" style="font-family:'DM Sans',sans-serif;font-size:13px;width:100%;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:6px 8px;color:var(--text);outline:none"/>
+    <div id="gmail-bar" style="margin-top:.85rem;display:flex;align-items:center;gap:7px">
+      <div class="gmail-dot" id="gmail-dot"></div>
+      <span style="font-size:12px;color:var(--text3)" id="gmail-status-short">Gmail not connected</span>
+      <button class="btn-ghost" onclick="connectGmail()" id="gmail-btn" style="font-size:12px;padding:3px 6px;margin-left:auto">Connect</button>
+    </div>
   </div>
 </aside>
 
 <main class="main" id="main-content">
-
   <div id="tab-songs">
     <div class="topbar">
       <div>
         <div style="font-size:12px;color:var(--text3);margin-bottom:3px" id="today-label"></div>
         <h1 class="page-title">A&R <strong>Songs</strong></h1>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <div class="gmail-bar" style="margin:0;padding:.6rem 1rem">
-          <div class="gmail-dot" id="gmail-dot"></div>
-          <span style="font-size:13px;color:var(--text2)" id="gmail-status-short">Gmail</span>
-          <button class="btn-ghost btn-sm" onclick="connectGmail()" id="gmail-btn" style="margin-left:6px">Connect</button>
-        </div>
-        <div class="field" style="min-width:0;flex:0">
-          <input type="password" id="at-token" placeholder="Airtable token…" oninput="saveConfig()" style="font-size:13px;padding:7px 10px;width:180px" />
-        </div>
-        <button class="btn btn-primary" onclick="startNewMeeting()">+ New meeting</button>
-      </div>
+      <button class="btn btn-primary" onclick="startNewMeeting()">+ New meeting</button>
     </div>
     <div id="meetings-container"></div>
   </div>
-
   <div id="tab-pipeline" style="display:none">
     <div class="topbar"><h1 class="page-title">A&R <strong>Pipeline</strong></h1></div>
-    <div class="coming-soon"><h2>Coming soon</h2><p>Track potential new signings and follow-ups here.</p></div>
+    <div class="coming-soon"><h2>Coming soon</h2><p>Track potential new signings here.</p></div>
   </div>
-
   <div id="tab-clients" style="display:none">
     <div class="topbar"><h1 class="page-title"><strong>Existing</strong> Clients</h1></div>
-    <div class="coming-soon"><h2>Coming soon</h2><p>Weekly updates per artist — deals, releases, next steps.</p></div>
+    <div class="coming-soon"><h2>Coming soon</h2><p>Weekly updates per artist.</p></div>
   </div>
-
 </main>
 </div>
 
-<div class="draft-modal" id="draft-modal" style="display:none" onclick="closeDraftModal(event)">
-  <div class="draft-inner" onclick="event.stopPropagation()">
+<div class="draft-modal" id="draft-modal" style="display:none" onclick="closeDraftIfOutside(event)">
+  <div class="draft-inner">
     <div class="draft-top">
       <div>
-        <div style="font-size:13px;color:var(--text2)">Draft to: <strong id="modal-to" style="color:var(--text)"></strong></div>
-        <div style="font-size:12px;color:var(--text3);margin-top:2px">CC: music@hypervision.club</div>
+        <div style="font-size:14px;font-weight:500" id="modal-title">Draft email</div>
+        <div style="font-size:12px;color:var(--text3);margin-top:3px">CC: music@hypervision.club always included</div>
       </div>
-      <button class="btn-ghost" onclick="closeDraftModal()">✕ Close</button>
+      <button class="btn-ghost" onclick="closeDraftModal()">✕</button>
     </div>
     <div class="draft-content">
       <div id="modal-alerts"></div>
       <div id="modal-contact-choice" style="display:none;margin-bottom:1rem"></div>
+      <div style="display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;align-items:center">
+        <div style="flex:1;min-width:150px">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:4px">To (email)</div>
+          <input type="email" id="modal-email-input" class="inp" placeholder="contact@label.com" style="font-size:13px"/>
+        </div>
+        <div style="min-width:120px">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Sender</div>
+          <select id="modal-sender" class="inp" style="font-size:13px;padding:7px 10px">
+            <option>Chris</option><option>Max</option><option>Ralph</option>
+          </select>
+        </div>
+      </div>
       <div style="font-size:12px;color:var(--text2);margin-bottom:4px">Subject</div>
-      <input type="text" class="subject-inp" id="modal-subject" />
+      <input type="text" class="subject-inp" id="modal-subject"/>
       <div style="font-size:12px;color:var(--text2);margin-bottom:5px">Email</div>
       <textarea class="edit-area" id="modal-body" rows="11"></textarea>
-      <div id="modal-email-row" style="display:none;margin-top:8px">
-        <input type="email" id="modal-manual-email" placeholder="Contact email not found — enter manually…" style="width:100%;font-size:13px;padding:7px 10px;border-radius:var(--r-sm);border:1px solid var(--amber-border);background:var(--amber-bg);color:var(--text);font-family:'DM Sans',sans-serif;outline:none"/>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:1.25rem;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="approveDraft()">✓ Approve & save to Gmail</button>
+      <div style="display:flex;gap:8px;margin-top:1.25rem;flex-wrap:wrap;align-items:center">
+        <button class="btn btn-primary" onclick="approveDraft()">✓ Save to Gmail drafts</button>
         <button class="btn btn-secondary" onclick="closeDraftModal()">Close</button>
-        <div id="modal-status" style="display:flex;align-items:center;font-size:13px;color:var(--text2)"></div>
+        <div id="modal-status" style="font-size:13px;color:var(--text2)"></div>
       </div>
     </div>
   </div>
@@ -210,10 +203,34 @@ const CLIENT_ID='888678513782-mpcldrih4ikqslvii6p2j54atu63p5t1.apps.googleuserco
 const REDIRECT=location.href.split('?')[0].split('#')[0];
 const SCOPES='https://www.googleapis.com/auth/gmail.compose https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/userinfo.profile';
 
-let gmailToken=null;
-let gmailUser=null;
-let meetings=[];
-let currentDraft=null;
+let gmailToken=null,gmailUser=null,meetings=[],currentDraft=null;
+
+const VIBE_TEMPLATES=[
+  ['groovy','upbeat','warm','catchy','summery','danceable','smooth'],
+  ['dark','moody','atmospheric','cinematic','hypnotic','intense','deep'],
+  ['emotional','heartfelt','vulnerable','raw','honest','stripped','intimate'],
+  ['energetic','euphoric','powerful','anthemic','driving','punchy','bold'],
+  ['playful','fun','quirky','fresh','vibrant','colourful','light']
+];
+const GENRES=['pop','dance','house','techno','trance','r&b','hip-hop','indie','folk','electronic','disco','afrobeats','k-pop','latin'];
+
+function getVibeSuggestions(titleHint,vibeHint){
+  const text=(titleHint+' '+vibeHint).toLowerCase();
+  let mood=VIBE_TEMPLATES[0];
+  if(/dark|night|deep|moody|atmo/i.test(text))mood=VIBE_TEMPLATES[1];
+  else if(/love|heart|feel|emotional|sad|miss/i.test(text))mood=VIBE_TEMPLATES[2];
+  else if(/energy|power|anthem|hype|fire/i.test(text))mood=VIBE_TEMPLATES[3];
+  else if(/fun|play|quirk|fresh|light/i.test(text))mood=VIBE_TEMPLATES[4];
+  const genre=GENRES.find(g=>text.includes(g))||'';
+  const shuffle=arr=>[...arr].sort(()=>Math.random()-.5);
+  const words=shuffle(mood).slice(0,3);
+  return[
+    `${words[0]} ${genre} track with a ${words[1]} edge`,
+    `${words[1]}, ${words[2]} ${genre||'pop'} song — instantly memorable`,
+    `super ${words[0]} ${genre||'feel'} with a really strong topline`,
+    `${genre||'fresh'} leaning with ${words[0]} energy and a killer hook`
+  ];
+}
 
 function saveConfig(){
   try{
@@ -223,21 +240,13 @@ function saveConfig(){
 }
 function loadConfig(){
   try{
-    const t=localStorage.getItem('hv_at');
-    const s=localStorage.getItem('hv_sender');
+    const t=localStorage.getItem('hv_at'),s=localStorage.getItem('hv_sender');
     if(t)document.getElementById('at-token').value=t;
     if(s)document.getElementById('sender-name').value=s;
   }catch(e){}
 }
-function saveMeetings(){
-  try{localStorage.setItem('hv_meetings',JSON.stringify(meetings));}catch(e){}
-}
-function loadMeetings(){
-  try{
-    const m=localStorage.getItem('hv_meetings');
-    if(m)meetings=JSON.parse(m);
-  }catch(e){}
-}
+function saveMeetings(){try{localStorage.setItem('hv_meetings',JSON.stringify(meetings));}catch(e){}}
+function loadMeetings(){try{const m=localStorage.getItem('hv_meetings');if(m)meetings=JSON.parse(m);}catch(e){}}
 
 (function(){
   const hash=location.hash;
@@ -249,8 +258,7 @@ function loadMeetings(){
 })();
 
 function connectGmail(){
-  const url=`https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT)}&response_type=token&scope=${encodeURIComponent(SCOPES)}&prompt=select_account`;
-  location.href=url;
+  location.href=`https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT)}&response_type=token&scope=${encodeURIComponent(SCOPES)}&prompt=select_account`;
 }
 async function fetchGmailUser(){
   try{
@@ -258,7 +266,7 @@ async function fetchGmailUser(){
     const u=await res.json();
     gmailUser=u;
     const firstName=u.given_name||u.name?.split(' ')[0]||'You';
-    document.getElementById('gmail-status-short').textContent=firstName;
+    document.getElementById('gmail-status-short').textContent=firstName+' connected';
     document.getElementById('gmail-btn').style.display='none';
     document.getElementById('gmail-dot').classList.add('on');
     document.getElementById('sender-name').value=firstName;
@@ -268,28 +276,23 @@ async function fetchGmailUser(){
 
 function showTab(t){
   ['songs','pipeline','clients'].forEach(id=>{
-    document.getElementById(`tab-${id}`).style.display=id===t?'block':'none';
-    document.getElementById(`nav-${id}`)?.classList.toggle('active',id===t);
+    document.getElementById('tab-'+id).style.display=id===t?'block':'none';
   });
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  document.getElementById('nav-'+t)?.classList.add('active');
 }
-document.querySelectorAll('.nav-item').forEach(el=>{
-  el.id=el.id||('nav-'+el.textContent.trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z-]/g,''));
-});
+document.getElementById('nav-songs').id='nav-songs';
 
 function formatDate(iso){
-  const d=new Date(iso);
+  const d=new Date(iso+'T12:00:00');
   return d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
 function todayISO(){return new Date().toISOString().split('T')[0];}
 
 function startNewMeeting(){
   const today=todayISO();
-  const existing=meetings.find(m=>m.date===today);
-  if(existing){
-    if(!confirm('There is already a meeting for today. Start a new one anyway?'))return;
-  }
-  const meeting={id:Date.now(),date:today,songs:[],open:true};
-  meetings.unshift(meeting);
+  if(meetings.find(m=>m.date===today)&&!confirm('A meeting for today already exists. Start a new one anyway?'))return;
+  meetings.unshift({id:Date.now(),date:today,songs:[],open:true});
   saveMeetings();
   renderMeetings();
 }
@@ -297,98 +300,183 @@ function startNewMeeting(){
 function renderMeetings(){
   const con=document.getElementById('meetings-container');
   if(!meetings.length){
-    con.innerHTML=`<div class="empty-state"><div style="font-size:32px">🎵</div><p>No meetings yet — click <strong>New meeting</strong> to start today's A&R session.</p></div>`;
+    con.innerHTML='<div class="empty-state"><div style="font-size:32px">🎵</div><p style="margin-top:.5rem;font-size:14px">No meetings yet — click <strong>New meeting</strong> to start.</p></div>';
     return;
   }
   con.innerHTML='';
   meetings.forEach((m,mi)=>{
     const isToday=m.date===todayISO();
-    const block=document.createElement('div');
-    block.className='meeting-block';
-    block.innerHTML=`
+    const div=document.createElement('div');
+    div.className='meeting-block';
+    div.innerHTML=`
       <div class="meeting-header">
-        <span class="meeting-date-badge${isToday?'':' past'}">${isToday?'Today — ':''}${formatDate(m.date)}</span>
+        <div class="meeting-date-badge${isToday?'':' past'}">
+          ${isToday?'<span style="opacity:.6;font-weight:400">Today —</span> ':''}
+          <span id="date-label-${mi}">${formatDate(m.date)}</span>
+          <button class="btn-ghost" onclick="editDate(${mi})" style="font-size:11px;padding:1px 5px;margin-left:2px;opacity:.6" title="Edit date">✎</button>
+        </div>
         <div class="meeting-divider"></div>
-        <button class="meeting-toggle" onclick="toggleMeeting(${mi})">${m.open?'Collapse ▴':'Expand ▾'}</button>
+        <button class="btn-ghost" onclick="toggleMeeting(${mi})" style="font-size:12px">${m.open?'Collapse ▴':'Expand ▾'}</button>
       </div>
       <div id="meeting-body-${mi}" style="display:${m.open?'block':'none'}">
         <div id="songs-list-${mi}"></div>
-        ${isToday||m.open?`<div class="add-song-form" id="add-form-${mi}">
-          <div style="font-size:13px;font-weight:500;margin-bottom:.85rem;color:var(--text2)">Add a song</div>
+        <div class="add-song-card" id="add-form-${mi}">
+          <div class="section-label">Add a song</div>
           <div style="display:flex;gap:7px;margin-bottom:10px">
-            <input type="text" id="disco-${mi}" placeholder="Paste DISCO link…" style="flex:1;font-size:13px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);outline:none;font-family:'DM Sans',sans-serif;color:var(--text)" />
-            <button class="btn btn-secondary btn-sm" onclick="fetchDisco(${mi})">Auto-fill</button>
+            <input type="text" id="disco-${mi}" class="inp" placeholder="Paste DISCO link…" style="flex:1;font-size:13px" onkeydown="if(event.key==='Enter')fetchDisco(${mi})"/>
+            <button class="btn btn-secondary btn-sm" onclick="fetchDisco(${mi})" id="fetch-btn-${mi}">Auto-fill</button>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-            <div style="flex:1;min-width:120px">
-              <input type="text" id="title-${mi}" placeholder="Track title" style="width:100%;font-size:13px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);outline:none;font-family:'DM Sans',sans-serif;color:var(--text)" />
-            </div>
-            <div style="flex:1;min-width:120px">
-              <input type="text" id="writers-${mi}" placeholder="Writers" style="width:100%;font-size:13px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);outline:none;font-family:'DM Sans',sans-serif;color:var(--text)" />
+            <input type="text" id="title-${mi}" class="inp" placeholder="Track title" style="flex:1;min-width:130px;font-size:13px"/>
+            <input type="text" id="writers-${mi}" class="inp" placeholder="Writers" style="flex:1;min-width:130px;font-size:13px"/>
+          </div>
+          <div style="margin-bottom:6px">
+            <textarea id="vibe-${mi}" class="inp" placeholder="Vibe — one punchy sentence, e.g. super catchy disco-influenced topline" rows="2" style="resize:none;font-size:13px"></textarea>
+          </div>
+          <div id="vibe-suggestions-${mi}" class="vibe-suggestions"></div>
+          <div style="margin-top:.5rem;display:flex;gap:7px;align-items:center;flex-wrap:wrap">
+            <div style="font-size:12px;color:var(--text3)">Pitch targets:</div>
+            <div class="tag-wrap" id="new-targets-wrap-${mi}" onclick="document.getElementById('new-target-input-${mi}').focus()" style="flex:1;min-width:180px">
+              <input type="text" id="new-target-input-${mi}" placeholder="Artist name — press Enter…" onkeydown="handleNewTarget(event,${mi})"/>
             </div>
           </div>
-          <textarea id="vibe-${mi}" placeholder="One punchy sentence — e.g. super catchy disco-influenced topline, warm and summery" rows="2" style="width:100%;font-size:13px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);outline:none;resize:none;font-family:'DM Sans',sans-serif;color:var(--text);margin-bottom:10px"></textarea>
-          <button class="btn btn-primary btn-sm" onclick="addSong(${mi})">Add song</button>
+          <div id="new-targets-display-${mi}" style="display:none;margin-top:6px;display:flex;flex-wrap:wrap;gap:5px"></div>
+          <button class="btn btn-primary btn-sm" onclick="addSong(${mi})" style="margin-top:.85rem">Add song ↵</button>
           <div id="add-status-${mi}" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);margin-left:10px"></div>
-        </div>`:''}
+        </div>
       </div>`;
-    con.appendChild(block);
+    con.appendChild(div);
     renderSongs(mi);
+    updateVibeSuggestions(mi);
+    document.getElementById(`title-${mi}`).addEventListener('input',()=>updateVibeSuggestions(mi));
+    document.getElementById(`vibe-${mi}`).addEventListener('input',()=>updateVibeSuggestions(mi));
   });
 }
 
-function toggleMeeting(mi){
-  meetings[mi].open=!meetings[mi].open;
-  saveMeetings();
-  renderMeetings();
+let newTargets={};
+function handleNewTarget(e,mi){
+  if(e.key==='Enter'||e.key===','){
+    e.preventDefault();
+    const val=e.target.value.trim().replace(/,$/,'');
+    if(!val)return;
+    if(!newTargets[mi])newTargets[mi]=[];
+    if(!newTargets[mi].includes(val)){newTargets[mi].push(val);renderNewTargets(mi);}
+    e.target.value='';
+  }
+}
+function renderNewTargets(mi){
+  const arr=newTargets[mi]||[];
+  const wrap=document.getElementById(`new-targets-wrap-${mi}`);
+  const input=document.getElementById(`new-target-input-${mi}`);
+  if(!wrap||!input)return;
+  wrap.querySelectorAll('.tag').forEach(t=>t.remove());
+  arr.forEach((t,ti)=>{
+    const tag=document.createElement('div');
+    tag.className='tag';
+    tag.innerHTML=`${t}<button onclick="removeNewTarget(${mi},${ti});event.stopPropagation()">×</button>`;
+    wrap.insertBefore(tag,input);
+  });
+}
+function removeNewTarget(mi,ti){
+  if(newTargets[mi])newTargets[mi].splice(ti,1);
+  renderNewTargets(mi);
+}
+
+function updateVibeSuggestions(mi){
+  const title=document.getElementById(`title-${mi}`)?.value||'';
+  const vibe=document.getElementById(`vibe-${mi}`)?.value||'';
+  const con=document.getElementById(`vibe-suggestions-${mi}`);
+  if(!con)return;
+  if(title.length<2&&vibe.length<2){con.innerHTML='';return;}
+  const suggestions=getVibeSuggestions(title,vibe);
+  con.innerHTML=suggestions.map(s=>`<div class="vibe-pill" onclick="setVibe(${mi},'${s.replace(/'/g,"\\'")}')">+ ${s}</div>`).join('');
+}
+function setVibe(mi,text){
+  const el=document.getElementById(`vibe-${mi}`);
+  if(el)el.value=text;
 }
 
 async function fetchDisco(mi){
-  const url=document.getElementById(`disco-${mi}`).value.trim();
+  const urlEl=document.getElementById(`disco-${mi}`);
+  const url=urlEl?.value.trim();
   if(!url){alert('Paste a DISCO link first');return;}
-  const btn=event.target;
-  btn.disabled=true;btn.textContent='…';
+  const btn=document.getElementById(`fetch-btn-${mi}`);
+  if(btn){btn.disabled=true;btn.textContent='…';}
+  let found=false;
   try{
-    const res=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-    const data=await res.json();
-    const html=data.contents||'';
-    const ogTitle=html.match(/og:title[^>]*content="([^"]+)"/i)||html.match(/content="([^"]+)"[^>]*og:title/i);
-    const twitterTitle=html.match(/twitter:title[^>]*content="([^"]+)"/i)||html.match(/content="([^"]+)"[^>]*twitter:title/i);
-    const raw=(ogTitle||twitterTitle)?.[1]||'';
+    const proxyUrl=`https://corsproxy.io/?${encodeURIComponent(url)}`;
+    const res=await fetch(proxyUrl);
+    const html=await res.text();
+    const og=html.match(/property="og:title"\s+content="([^"]+)"/i)||html.match(/content="([^"]+)"\s+property="og:title"/i);
+    const tw=html.match(/name="twitter:title"\s+content="([^"]+)"/i)||html.match(/content="([^"]+)"\s+name="twitter:title"/i);
+    const raw=(og||tw)?.[1]||'';
     if(raw){
-      const cleaned=raw.replace(/^Hypervision\s*[-–]\s*/i,'').trim();
-      const byIdx=cleaned.indexOf(' by ');
+      const cleaned=raw.replace(/^Hypervision\s*[-–|]\s*/i,'').replace(/\s*\|\s*Hypervision.*/i,'').trim();
+      const byIdx=cleaned.search(/ by /i);
       if(byIdx>-1){
         document.getElementById(`title-${mi}`).value=cleaned.substring(0,byIdx).trim();
         document.getElementById(`writers-${mi}`).value=cleaned.substring(byIdx+4).trim();
-      } else {
+        found=true;
+      } else if(cleaned){
         document.getElementById(`title-${mi}`).value=cleaned;
+        found=true;
       }
-    } else {alert('Could not auto-fill — fill in manually.');}
-  }catch(e){alert('Could not auto-fill — fill in manually.');}
-  btn.disabled=false;btn.textContent='Auto-fill';
+    }
+    if(!found){
+      const titleTag=html.match(/<title>([^<]+)<\/title>/i)?.[1]||'';
+      if(titleTag){
+        const cleaned=titleTag.replace(/^Hypervision\s*[-–|]\s*/i,'').replace(/\s*\|\s*Hypervision.*/i,'').trim();
+        const byIdx=cleaned.search(/ by /i);
+        if(byIdx>-1){
+          document.getElementById(`title-${mi}`).value=cleaned.substring(0,byIdx).trim();
+          document.getElementById(`writers-${mi}`).value=cleaned.substring(byIdx+4).trim();
+          found=true;
+        } else if(cleaned&&cleaned!=='Hypervision'){
+          document.getElementById(`title-${mi}`).value=cleaned;
+          found=true;
+        }
+      }
+    }
+  }catch(e){
+    try{
+      const res2=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const data=await res2.json();
+      const html=data.contents||'';
+      const og=html.match(/og:title[^>]*content="([^"]+)"/i)||html.match(/content="([^"]+)"[^>]*og:title/i);
+      const raw=og?.[1]||'';
+      if(raw){
+        const cleaned=raw.replace(/^Hypervision\s*[-–]\s*/i,'').trim();
+        const byIdx=cleaned.search(/ by /i);
+        if(byIdx>-1){document.getElementById(`title-${mi}`).value=cleaned.substring(0,byIdx).trim();document.getElementById(`writers-${mi}`).value=cleaned.substring(byIdx+4).trim();found=true;}
+        else if(cleaned){document.getElementById(`title-${mi}`).value=cleaned;found=true;}
+      }
+    }catch(e2){}
+  }
+  if(!found)alert('Could not auto-fill — fill in manually. You can always edit the title and writers after adding.');
+  if(btn){btn.disabled=false;btn.textContent='Auto-fill';}
 }
 
 function addSong(mi){
-  const title=document.getElementById(`title-${mi}`).value.trim();
+  const title=document.getElementById(`title-${mi}`)?.value.trim();
   if(!title){alert('Fill in the track title first');return;}
   const song={
     id:Date.now(),
-    disco:document.getElementById(`disco-${mi}`).value.trim(),
+    disco:document.getElementById(`disco-${mi}`)?.value.trim()||'',
     title,
-    writers:document.getElementById(`writers-${mi}`).value.trim(),
-    vibe:document.getElementById(`vibe-${mi}`).value.trim(),
-    targets:[],
+    writers:document.getElementById(`writers-${mi}`)?.value.trim()||'',
+    vibe:document.getElementById(`vibe-${mi}`)?.value.trim()||'',
+    targets:[...(newTargets[mi]||[])],
     pitches:[],
     open:true
   };
   meetings[mi].songs.push(song);
+  newTargets[mi]=[];
   saveMeetings();
-  document.getElementById(`disco-${mi}`).value='';
-  document.getElementById(`title-${mi}`).value='';
-  document.getElementById(`writers-${mi}`).value='';
-  document.getElementById(`vibe-${mi}`).value='';
+  ['disco','title','writers','vibe'].forEach(f=>{const el=document.getElementById(`${f}-${mi}`);if(el)el.value='';});
+  const wrap=document.getElementById(`new-targets-wrap-${mi}`);
+  if(wrap)wrap.querySelectorAll('.tag').forEach(t=>t.remove());
   renderSongs(mi);
+  updateVibeSuggestions(mi);
 }
 
 function renderSongs(mi){
@@ -398,8 +486,8 @@ function renderSongs(mi){
   if(!songs.length){con.innerHTML='';return;}
   con.innerHTML='';
   songs.forEach((song,si)=>{
-    const pitchCount=song.pitches.length;
     const approvedCount=song.pitches.filter(p=>p.approved).length;
+    const totalTargets=song.targets.length;
     const card=document.createElement('div');
     card.className='song-card';
     card.innerHTML=`
@@ -410,47 +498,76 @@ function renderSongs(mi){
           <div class="song-writers">${song.writers||'—'}</div>
         </div>
         <div class="song-badges">
-          ${song.vibe?`<span class="badge badge-neutral" style="max-width:180px;overflow:hidden;text-overflow:ellipsis">${song.vibe.substring(0,30)}${song.vibe.length>30?'…':''}</span>`:''}
+          ${song.vibe?`<span class="badge badge-neutral" style="max-width:160px;overflow:hidden;text-overflow:ellipsis;display:inline-block">${song.vibe.substring(0,28)}${song.vibe.length>28?'…':''}</span>`:''}
           ${approvedCount?`<span class="badge badge-green">${approvedCount} sent</span>`:''}
-          ${pitchCount-approvedCount>0?`<span class="badge badge-amber">${pitchCount-approvedCount} pending</span>`:''}
+          ${totalTargets-approvedCount>0?`<span class="badge badge-amber">${totalTargets-approvedCount} to pitch</span>`:''}
         </div>
-        <div style="color:var(--text3);font-size:13px;margin-left:4px">${song.open?'▴':'▾'}</div>
+        <div style="color:var(--text3);font-size:12px;margin-left:4px;flex-shrink:0">${song.open?'▴':'▾'}</div>
       </div>
       <div class="song-body${song.open?' open':''}" id="song-body-${mi}-${si}">
-        <div class="field-row">
-          <div class="field" style="max-width:340px">
-            <label>DISCO link</label>
-            <input type="text" value="${song.disco||''}" onchange="updateSong(${mi},${si},'disco',this.value)" placeholder="https://s.disco.ac/…"/>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem">
+          <div class="field" style="flex:1;min-width:200px">
+            <label>Track title</label>
+            <input type="text" class="inp" value="${song.title.replace(/"/g,'&quot;')}" onchange="updateSong(${mi},${si},'title',this.value)" style="font-size:13px"/>
           </div>
-          <div class="field">
-            <label>Vibe</label>
-            <input type="text" value="${song.vibe||''}" onchange="updateSong(${mi},${si},'vibe',this.value)" placeholder="One punchy sentence…"/>
+          <div class="field" style="flex:1;min-width:150px">
+            <label>Writers</label>
+            <input type="text" class="inp" value="${song.writers.replace(/"/g,'&quot;')}" onchange="updateSong(${mi},${si},'writers',this.value)" style="font-size:13px"/>
+          </div>
+          <div class="field" style="flex:2;min-width:200px">
+            <label>DISCO link</label>
+            <input type="text" class="inp" value="${song.disco.replace(/"/g,'&quot;')}" onchange="updateSong(${mi},${si},'disco',this.value)" style="font-size:13px"/>
           </div>
         </div>
-        <div style="margin-top:1rem">
-          <div style="font-size:12px;color:var(--text2);margin-bottom:.5rem;font-weight:500">Pitch targets — type artist name, press Enter</div>
-          <div class="tag-wrap" id="target-wrap-${mi}-${si}" onclick="document.getElementById('target-input-${mi}-${si}').focus()">
+        <div class="field" style="margin-bottom:1rem">
+          <label>Vibe</label>
+          <input type="text" class="inp" value="${song.vibe.replace(/"/g,'&quot;')}" onchange="updateSong(${mi},${si},'vibe',this.value)" placeholder="One punchy sentence…" style="font-size:13px"/>
+        </div>
+        <div style="margin-bottom:1rem">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:.5rem;font-weight:500">Pitch targets</div>
+          <div class="tag-wrap" id="target-wrap-${mi}-${si}" onclick="document.getElementById('target-inp-${mi}-${si}').focus()">
             ${song.targets.map((t,ti)=>`<div class="tag">${t}<button onclick="removeTarget(${mi},${si},${ti});event.stopPropagation()">×</button></div>`).join('')}
-            <input type="text" id="target-input-${mi}-${si}" placeholder="e.g. Justin Bieber…" onkeydown="handleTargetInput(event,${mi},${si})"/>
+            <input type="text" id="target-inp-${mi}-${si}" placeholder="Add artist — press Enter…" onkeydown="handleTargetInput(event,${mi},${si})"/>
           </div>
-          <div style="font-size:11px;color:var(--text3);margin-top:3px">We'll find their management in Airtable, Gmail history, or online</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px">Type artist name and press Enter. We'll look up their management in Airtable or Gmail history.</div>
         </div>
         ${song.targets.length?`
-        <div class="pitches-section">
-          <div style="font-size:12px;color:var(--text2);margin-bottom:.5rem;font-weight:500">Drafts</div>
-          ${song.targets.map((target,ti)=>{
-            const pitch=song.pitches.find(p=>p.target===target);
-            return `<div class="pitch-row${pitch?.approved?' approved':''}${pitch?.skipped?' skipped':''}">
-              <div class="pitch-artist">${target}</div>
-              <div class="pitch-contact">${pitch?.contactName?pitch.contactName+(pitch.email?` &lt;${pitch.email}&gt;`:''):'—'}</div>
-              <div class="pitch-actions">
-                ${pitch?.approved
-                  ?`<span class="badge badge-green">✓ Sent to drafts</span>`
-                  :`<button class="btn btn-primary btn-sm" onclick="openDraft(${mi},${si},'${target.replace(/'/g,"\\'")}')">Draft email</button>`
-                }
-              </div>
-            </div>`;
-          }).join('')}
+        <div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:.5rem;font-weight:500">Email drafts</div>
+          <table class="pitch-table">
+            <thead><tr>
+              <th>Artist</th><th>Contact</th><th>Sender</th><th>Status</th><th></th>
+            </tr></thead>
+            <tbody>${song.targets.map((target,ti)=>{
+              const pitch=song.pitches.find(p=>p.target===target);
+              return`<tr class="${pitch?.approved?'approved':''}">
+                <td style="font-weight:500">${target}</td>
+                <td style="color:var(--text2)">${pitch?.contactName||'—'}${pitch?.email?`<br><span style="font-size:11px;color:var(--text3)">${pitch.email}</span>`:''}</td>
+                <td>
+                  ${pitch?.approved
+                    ?`<span style="font-size:12px;color:var(--green)">${pitch.sender||''}</span>`
+                    :`<select class="inp" id="pitcher-${mi}-${si}-${ti}" style="font-size:12px;padding:4px 7px;width:85px">
+                      <option${document.getElementById('sender-name').value==='Chris'?' selected':''}>Chris</option>
+                      <option${document.getElementById('sender-name').value==='Max'?' selected':''}>Max</option>
+                      <option${document.getElementById('sender-name').value==='Ralph'?' selected':''}>Ralph</option>
+                    </select>`
+                  }
+                </td>
+                <td>
+                  ${pitch?.approved
+                    ?`<span class="badge badge-green">✓ In Gmail drafts</span>`
+                    :`<span class="badge badge-amber">To pitch</span>`
+                  }
+                </td>
+                <td>
+                  ${pitch?.approved
+                    ?''
+                    :`<button class="btn btn-primary btn-xs" onclick="openDraft(${mi},${si},'${target.replace(/'/g,"\\'")}',${ti})">Draft →</button>`
+                  }
+                </td>
+              </tr>`;
+            }).join('')}</tbody>
+          </table>
         </div>`:''}
         ${song.disco?`<div style="margin-top:.85rem"><a href="${song.disco}" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none">↗ Open in DISCO</a></div>`:''}
       </div>`;
@@ -458,15 +575,9 @@ function renderSongs(mi){
   });
 }
 
-function toggleSong(mi,si){
-  meetings[mi].songs[si].open=!meetings[mi].songs[si].open;
-  saveMeetings();
-  renderSongs(mi);
-}
-function updateSong(mi,si,field,val){
-  meetings[mi].songs[si][field]=val;
-  saveMeetings();
-}
+function toggleSong(mi,si){meetings[mi].songs[si].open=!meetings[mi].songs[si].open;saveMeetings();renderSongs(mi);}
+function updateSong(mi,si,field,val){meetings[mi].songs[si][field]=val;saveMeetings();}
+
 function handleTargetInput(e,mi,si){
   if(e.key==='Enter'||e.key===','){
     e.preventDefault();
@@ -480,10 +591,25 @@ function handleTargetInput(e,mi,si){
   }
 }
 function removeTarget(mi,si,ti){
+  const target=meetings[mi].songs[si].targets[ti];
   meetings[mi].songs[si].targets.splice(ti,1);
-  meetings[mi].songs[si].pitches=meetings[mi].songs[si].pitches.filter(p=>p.target!==meetings[mi].songs[si].targets[ti]);
+  meetings[mi].songs[si].pitches=meetings[mi].songs[si].pitches.filter(p=>p.target!==target);
   saveMeetings();
   renderSongs(mi);
+}
+
+function toggleMeeting(mi){meetings[mi].open=!meetings[mi].open;saveMeetings();renderMeetings();}
+
+function editDate(mi){
+  const current=meetings[mi].date;
+  const newDate=prompt('Change meeting date (YYYY-MM-DD):',current);
+  if(newDate&&/^\d{4}-\d{2}-\d{2}$/.test(newDate)){
+    meetings[mi].date=newDate;
+    saveMeetings();
+    renderMeetings();
+  } else if(newDate){
+    alert('Use format YYYY-MM-DD, e.g. 2025-01-13');
+  }
 }
 
 async function atFetch(path){
@@ -500,14 +626,12 @@ async function lookupArtist(name){
   const data=await atFetch(`/Talents?filterByFormula=${formula}&maxRecords=1`);
   if(!data?.records?.length)return null;
   const rec=data.records[0];
-  const talentId=rec.id;
-  const talentName=rec.fields['Name']||name;
+  const talentId=rec.id,talentName=rec.fields['Name']||name;
   const teamsFormula=encodeURIComponent(`FIND("${talentId}",ARRAYJOIN({Management (Roster)}))`);
   const teamsData=await atFetch(`/Teams?filterByFormula=${teamsFormula}&maxRecords=10`);
   const contacts=(teamsData?.records||[]).map(r=>({id:r.id,name:r.fields['Name']||'Unknown',email:r.fields['Email']||null,tags:r.fields['Tags']||''}));
   return{type:'artist',talentName,contacts};
 }
-
 async function lookupCompany(name){
   const formula=encodeURIComponent(`SEARCH(LOWER("${name.toLowerCase()}"),LOWER({Name}))`);
   const data=await atFetch(`/Companies?filterByFormula=${formula}&maxRecords=1`);
@@ -516,7 +640,6 @@ async function lookupCompany(name){
   const f=rec.fields;
   return{type:'company',companyName:f['Name']||name,email:f['Email']||null,contactName:f['Contact name']||null};
 }
-
 async function checkGmailHistory(name){
   if(!gmailToken)return null;
   try{
@@ -529,105 +652,99 @@ async function checkGmailHistory(name){
     const toHeader=msg.payload?.headers?.find(h=>h.name==='To');
     if(!toHeader)return null;
     const emailMatch=toHeader.value.match(/[\w.-]+@[\w.-]+\.\w+/);
-    return emailMatch?{email:emailMatch[0],source:'gmail'}:null;
+    return emailMatch?{email:emailMatch[0],contactName:toHeader.value.split('<')[0].trim()||null}:null;
   }catch(e){return null;}
 }
 
-function buildBody(song,target,contactName){
-  const sender=document.getElementById('sender-name').value;
+const EMAIL_OPENERS=[
+  (firstName,vibe,target)=>`Hope all is well! ${vibe?vibe+' — t':'T'}hought this could be a great fit for ${target}.`,
+  (firstName,vibe,target)=>`Hope you're having a good week! ${vibe?'We have something with '+vibe+' — and i':'I'} immediately thought of ${target}.`,
+  (firstName,vibe,target)=>`Hope everything's going well your end! ${vibe?vibe.charAt(0).toUpperCase()+vibe.slice(1)+' — ':''} Really think ${target} could love this.`,
+  (firstName,vibe,target)=>`Hope all is good! Got something I think could really work for ${target}${vibe?' — '+vibe:''}.`,
+];
+
+function buildBody(song,target,contactName,sender){
   const firstName=contactName?contactName.split(' ')[0]:'guys';
-  const vibe=song.vibe;
-  const descLine=vibe?`${vibe} — thought it could be a great fit for ${target}.`:`Just heard something I think could really work for ${target}.`;
-  return`Hi ${firstName},\n\nHope all is well! ${descLine}\n\n${song.title}: ${song.disco||'[demo link]'} (${song.writers||''})\n\nExcited to hear your thoughts!\n\nBest,\n${sender}`;
+  const senderName=sender||document.getElementById('sender-name').value;
+  const opener=EMAIL_OPENERS[Math.floor(Math.random()*EMAIL_OPENERS.length)](firstName,song.vibe,target);
+  return`Hi ${firstName},\n\n${opener}\n\n${song.title}: ${song.disco||'[demo link]'} (${song.writers||''})\n\nExcited to hear your thoughts!\n\nBest,\n${senderName}`;
 }
 
-async function openDraft(mi,si,target){
+async function openDraft(mi,si,target,ti){
   const song=meetings[mi].songs[si];
-  const statusEl=document.getElementById(`add-status-${mi}`)||{innerHTML:''};
+  const senderEl=document.getElementById(`pitcher-${mi}-${si}-${ti}`);
+  const sender=senderEl?.value||document.getElementById('sender-name').value;
   document.getElementById('modal-alerts').innerHTML=`<div class="loading"><div class="spinner"></div><span>Looking up ${target}…</span></div>`;
   document.getElementById('modal-contact-choice').style.display='none';
-  document.getElementById('modal-email-row').style.display='none';
   document.getElementById('draft-modal').style.display='flex';
-  document.getElementById('modal-to').textContent=target;
+  document.getElementById('modal-title').textContent=`Draft — ${target}`;
   document.getElementById('modal-subject').value=`${song.title} - ${target}`;
   document.getElementById('modal-body').value='';
   document.getElementById('modal-status').innerHTML='';
+  document.getElementById('modal-email-input').value='';
+  document.getElementById('modal-sender').value=sender;
 
   let info=await lookupArtist(target);
   if(!info)info=await lookupCompany(target);
-  let contacts=[];
-  let selectedContact=null;
-  let email=null;
-  let source='';
+  let contacts=[],selectedContact=null,email=null,source='';
 
   if(info){
     contacts=info.contacts||[];
-    if(contacts.length===1){selectedContact=contacts[0];email=contacts[0].email;source='airtable';}
-    else if(contacts.length>1){
-      source='airtable-multi';
-      selectedContact=contacts[0];email=contacts[0]?.email||null;
-    } else if(info.email){email=info.email;source='airtable';}
+    if(contacts.length===1){selectedContact=contacts[0];email=contacts[0]?.email||null;source='airtable';}
+    else if(contacts.length>1){source='airtable-multi';selectedContact=contacts[0];email=contacts[0]?.email||null;}
+    else if(info.email){email=info.email;selectedContact={name:info.contactName,email:info.email};source='airtable';}
   }
-
   if(!email&&gmailToken){
     const gh=await checkGmailHistory(target);
-    if(gh){email=gh.email;source='gmail';}
+    if(gh){email=gh.email;if(!selectedContact)selectedContact={name:gh.contactName,email:gh.email};source='gmail';}
   }
 
-  currentDraft={mi,si,target,info,contacts,selectedContact,email,source};
-
+  currentDraft={mi,si,ti,target,info,contacts,selectedContact,email,source,sender};
   document.getElementById('modal-alerts').innerHTML='';
+
   if(source==='airtable-multi'&&contacts.length>1){
-    const choiceDiv=document.getElementById('modal-contact-choice');
-    choiceDiv.style.display='block';
-    choiceDiv.innerHTML=`<div style="font-size:12px;color:var(--text2);margin-bottom:6px">Multiple contacts found — choose one:</div>`
-      +contacts.map((c,ci)=>`<div class="contact-choice${ci===0?' selected':''}" id="choice-${ci}" onclick="selectModalContact(${ci})">`
-        +`<span><strong>${c.name}</strong>${c.tags?` · ${c.tags}`:''}</span>`
-        +`<span style="font-size:12px;color:var(--text3)">${c.email||'no email'}</span></div>`).join('');
+    const cd=document.getElementById('modal-contact-choice');
+    cd.style.display='block';
+    cd.innerHTML=`<div style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:500">Multiple contacts — choose one:</div>`
+      +contacts.map((c,ci)=>`<div class="contact-choice${ci===0?' selected':''}" id="cc-${ci}" onclick="selectModalContact(${ci})">
+        <span><strong>${c.name}</strong>${c.tags?' · '+c.tags:''}</span>
+        <span style="font-size:12px;color:var(--text3)">${c.email||'no email'}</span>
+      </div>`).join('');
+  }
+  if(source==='gmail'){
+    document.getElementById('modal-alerts').innerHTML=`<div class="alert alert-blue">📧 Email found in Gmail history: ${email}</div>`;
   }
   if(!email){
-    document.getElementById('modal-email-row').style.display='block';
-    document.getElementById('modal-alerts').innerHTML+=`<div class="alert alert-amber">Contact email not found${!gmailToken?' — connect Gmail to also check email history':' in Airtable or Gmail history'}. Enter manually below.</div>`;
-  } else if(source==='gmail'){
-    document.getElementById('modal-alerts').innerHTML+=`<div class="alert" style="background:var(--blue-bg);color:var(--blue);border:1px solid #bfdbfe;font-size:13px">Email found in Gmail history: ${email}</div>`;
+    document.getElementById('modal-alerts').innerHTML+=`<div class="alert alert-amber">⚠ No email found in Airtable${gmailToken?'':' (connect Gmail to also check email history)'}. Enter manually below.</div>`;
   }
 
+  if(email)document.getElementById('modal-email-input').value=email;
   const contactName=selectedContact?.name||info?.contactName||null;
-  document.getElementById('modal-to').textContent=`${target}${contactName?' — '+contactName:''}${email?' <'+email+'>':''}`;
-  document.getElementById('modal-body').value=buildBody(song,target,contactName);
+  document.getElementById('modal-body').value=buildBody(song,target,contactName,sender);
 }
 
 function selectModalContact(ci){
-  document.querySelectorAll('[id^="choice-"]').forEach((el,i)=>el.classList.toggle('selected',i===ci));
+  document.querySelectorAll('[id^="cc-"]').forEach((el,i)=>el.classList.toggle('selected',i===ci));
   currentDraft.selectedContact=currentDraft.contacts[ci];
   currentDraft.email=currentDraft.contacts[ci]?.email||null;
+  if(currentDraft.email)document.getElementById('modal-email-input').value=currentDraft.email;
   const song=meetings[currentDraft.mi].songs[currentDraft.si];
-  document.getElementById('modal-body').value=buildBody(song,currentDraft.target,currentDraft.selectedContact?.name);
-  document.getElementById('modal-email-row').style.display=currentDraft.email?'none':'block';
+  document.getElementById('modal-body').value=buildBody(song,currentDraft.target,currentDraft.selectedContact?.name,currentDraft.sender);
 }
 
-function closeDraftModal(e){
-  if(e&&e.target!==document.getElementById('draft-modal'))return;
-  document.getElementById('draft-modal').style.display='none';
-  currentDraft=null;
-}
+function closeDraftIfOutside(e){if(e.target===document.getElementById('draft-modal'))closeDraftModal();}
+function closeDraftModal(){document.getElementById('draft-modal').style.display='none';currentDraft=null;}
 
 async function approveDraft(){
   if(!currentDraft)return;
-  const statusEl=document.getElementById('modal-status');
-  const manualEmail=document.getElementById('modal-manual-email').value.trim();
-  const email=currentDraft.email||manualEmail||null;
+  const email=document.getElementById('modal-email-input').value.trim();
   if(!email){alert('Enter the contact email to continue');return;}
-
   const subject=document.getElementById('modal-subject').value;
   const body=document.getElementById('modal-body').value;
-
-  if(!gmailToken){
-    statusEl.innerHTML=`<span style="color:var(--amber)">Connect Gmail first to save drafts</span>`;
-    return;
-  }
-
-  statusEl.innerHTML=`<div class="loading"><div class="spinner"></div><span>Saving to Gmail…</span></div>`;
+  const sender=document.getElementById('modal-sender').value;
+  const statusEl=document.getElementById('modal-status');
+  if(!gmailToken){statusEl.innerHTML='<span style="color:var(--amber)">Connect Gmail first</span>';return;}
+  statusEl.innerHTML='<div class="loading"><div class="spinner"></div><span>Saving…</span></div>';
   try{
     const gmailSender=gmailUser?.email||'me';
     const raw=`From: ${gmailSender}\r\nTo: ${email}\r\nCc: music@hypervision.club\r\nSubject: ${subject}\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n${body}`;
@@ -638,29 +755,21 @@ async function approveDraft(){
       body:JSON.stringify({message:{raw:encoded}})
     });
     if(res.ok){
-      const {mi,si,target}=currentDraft;
+      const{mi,si,target}=currentDraft;
       const contactName=currentDraft.selectedContact?.name||currentDraft.info?.contactName||null;
-      const existing=meetings[mi].songs[si].pitches.findIndex(p=>p.target===target);
-      const pitchObj={target,contactName,email,approved:true,date:new Date().toLocaleDateString('en-GB'),sender:document.getElementById('sender-name').value};
-      if(existing>=0)meetings[mi].songs[si].pitches[existing]=pitchObj;
+      const pitchObj={target,contactName,email,approved:true,date:new Date().toLocaleDateString('en-GB'),sender};
+      const idx=meetings[mi].songs[si].pitches.findIndex(p=>p.target===target);
+      if(idx>=0)meetings[mi].songs[si].pitches[idx]=pitchObj;
       else meetings[mi].songs[si].pitches.push(pitchObj);
       saveMeetings();
-      statusEl.innerHTML=`<span style="color:var(--green)">✓ Saved to Gmail drafts</span>`;
-      setTimeout(()=>{
-        document.getElementById('draft-modal').style.display='none';
-        currentDraft=null;
-        renderSongs(mi);
-      },1200);
-    } else {
-      statusEl.innerHTML=`<span style="color:var(--red)">Error saving — try again</span>`;
-    }
+      statusEl.innerHTML='<span style="color:var(--green)">✓ Saved to Gmail drafts!</span>';
+      setTimeout(()=>{closeDraftModal();renderSongs(mi);},1000);
+    }else{statusEl.innerHTML='<span style="color:var(--red)">Error — try again</span>';}
   }catch(e){statusEl.innerHTML=`<span style="color:var(--red)">Error: ${e.message}</span>`;}
 }
 
 document.getElementById('today-label').textContent=formatDate(todayISO());
-loadConfig();
-loadMeetings();
-renderMeetings();
+loadConfig();loadMeetings();renderMeetings();
 </script>
 </body>
 </html>
